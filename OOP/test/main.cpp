@@ -3,50 +3,131 @@
 #include <vector>
 #include <sstream>
 #include <string>
-#include "student.h"
 
 using namespace std;
 
-student linetostu(string input, char delimiter)
-{
-    string a[5];
-    student b;
-    int i = 0;
-    stringstream ss(input);
-    string temp;
-    while (getline(ss, temp, delimiter))
-    {
-        a[i] = temp;
-        i++;
-    }
-    b.Input(a[0], a[1], a[2], a[3], a[4]);
+void filetostuvec();
 
-    return b;
+class student
+{
+private:
+    string name;
+    string id;
+    string birthyear;
+    string department;
+    string tel;
+
+public:
+    student()
+    {
+    }
+    student(string a, string b, string c, string d, string e)
+    {
+        this->id = b;
+        this->name = a;
+        this->birthyear = c;
+        this->department = d;
+        this->tel = e;
+    }
+    void printstudent()
+    {
+        cout << this->name << this->id << this->birthyear << this->department << this->tel << endl;
+    }
+};
+
+vector<student> v;
+
+int main()
+{
+    filetostuvec();
+    /*
+    filetostuvec();
+    ifstream fin;
+    fin.open("file1.txt");
+    string line;
+    string str[5];
+    int i = 0;
+    while (!fin.eof())
+    {
+        i = 0;
+        getline(fin, line);
+        stringstream ss(line);
+        string word;
+        while (!ss.eof())
+        {
+            getline(ss, word, '/');
+            str[i] = word;
+            i++;
+        }
+        student st = student(str[0], str[1], str[2], str[3], str[4]);
+        v.push_back(st);
+    }
+    vector<student>::iterator iter;
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i].printstudent();
+    }
+
+    fin.close();*/
 }
 
-vector<student> filetostuvec()
+/*
+string adv_tokenizer(string s, char del)
 {
-    string filename("file1.txt");
-    vector<student> lines;
-    string line;
-
-    ifstream input_file(filename);
-    if (!input_file.is_open())
+    stringstream ss(s);
+    string word;
+    while (!ss.eof())
     {
-        cerr << "Could not open the file - '" << filename << "'" << endl;
+        getline(ss, word, del);
+        cout << word << endl;
     }
-
-    while (getline(input_file, line))
-    {
-        student b = linetostu(line, '/');
-        lines.push_back(b);
-    }
-
-    input_file.close();
-    return lines;
 }
 
 int main()
 {
-    vector<student> test = filetostuvec();
+    ifstream fin;
+    fin.open("file1.txt");
+    string line;
+    string str[5] = 0;
+
+    while (!fin.eof())
+    {
+        getline(fin, line);
+        adv_tokenizer(line, '/');
+        cout << line << endl;
+    }
+
+    fin.close();
+}
+*/
+
+void filetostuvec()
+{
+    ifstream fin;
+    fin.open("file1.txt");
+    string line;
+    string str[5];
+    int i = 0;
+    while (!fin.eof())
+    {
+        i = 0;
+        getline(fin, line);
+        stringstream ss(line);
+        string word;
+        while (!ss.eof())
+        {
+            getline(ss, word, '/');
+            str[i] = word;
+            i++;
+        }
+        student st = student(str[0], str[1], str[2], str[3], str[4]);
+        v.push_back(st);
+    }
+    vector<student>::iterator iter;
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i].printstudent();
+    }
+
+    fin.close();
 }
