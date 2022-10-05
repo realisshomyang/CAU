@@ -1,5 +1,23 @@
 #include <iostream>
-#include "student.h"
+#include <string>
+int searchmodenum();
+int sortstunum();
+
+/*
+class student
+{
+private:
+    std :: string stu_name;
+    ststring stu_id;
+    string stu_birthyear;
+    string stu_department;
+    string stu_tel;
+
+public:
+    student()
+    {
+    }
+};*/
 
 using namespace std;
 int getdigit(int a);
@@ -104,13 +122,10 @@ int main(void)
         }
         else if (num == 2)
         {
-            int srnum;
-            cout << "1. Search by name\n2. Search by student ID(10 numbers)\n3. Search by admission year(4numbers) Option\n4. Search by department name\n5. List ALL\n";
-            cin >> srnum;
+            int searchmode = searchmodenum();
         }
         else if (num == 3)
         {
-            int sonum;
             cout << "1. Sort by Name\n2. Sort by Student ID\n3. Sort by Admission Year\n4. Sort by Department name\n";
         }
         else if (num == 4)
@@ -130,4 +145,33 @@ int getdigit(int a)
     string tmp;
     tmp = to_string(a);
     return tmp.size();
+}
+
+int searchmodenum()
+{
+    int srnum;
+    cout << "1. Search by name\n2. Search by student ID(10 numbers)\n3. Search by admission year(4numbers) Option\n4. Search by department name\n5. List ALL\n";
+    cin >> srnum;
+    if ((srnum > 0) && (srnum <= 5))
+    {
+        return srnum;
+    }
+    else
+    {
+        return searchmodenum();
+    }
+}
+int sortmodenum()
+{
+    int srnum;
+    cout << "1. Sort by Name\n2. Sort by Student ID\n3. Sort by Admission Year\n4. Sort by Department name\n";
+    cin >> srnum;
+    if ((srnum > 0) && (srnum <= 4))
+    {
+        return srnum;
+    }
+    else
+    {
+        return sortmodenum();
+    }
 }
