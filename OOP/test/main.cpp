@@ -7,7 +7,7 @@
 using namespace std;
 
 int filetostuvec();
-
+void vectofile();
 class student
 {
 private:
@@ -33,6 +33,26 @@ public:
     {
         cout << this->name << this->id << this->birthyear << this->department << this->tel << endl;
     }
+    string getname()
+    {
+        return name;
+    }
+    string getid()
+    {
+        return id;
+    }
+    string getbirthyear()
+    {
+        return birthyear;
+    }
+    string getdepartment()
+    {
+        return department;
+    }
+    string gettel()
+    {
+        return tel;
+    }
 };
 
 vector<student> v;
@@ -41,10 +61,11 @@ int main()
 {
     filetostuvec();
     vector<student>::iterator iter;
-    for (int i = 0; i < v.size(); i++)
+    /*for (int i = 0; i < v.size(); i++)
     {
         v[i].printstudent();
-    }
+    }*/
+    vectofile();
     /*
     filetostuvec();
     ifstream fin;
@@ -118,6 +139,7 @@ int filetostuvec()
 
         ofstream writeFile;
         writeFile.open("file1.txt");
+        writeFile.close();
         return 0;
     }
     else
@@ -144,5 +166,14 @@ int filetostuvec()
 
         fin.close();
         return 1;
+    }
+}
+void vectofile()
+{
+    vector<student>::iterator iter;
+    for (int i = 0; i < v.size(); i++)
+    {
+        string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+        cout << temp;
     }
 }

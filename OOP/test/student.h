@@ -16,8 +16,7 @@ class student
 
 public:
     student();
-    student(string name, string student_id, string birthyear, string department, string tel);
-    void inputInfo(string name, string student_id, string birthyear, string department, string tel);
+    void Input(string name, string student_id, string birthyear, string department, string tel);
     void printStu();
 };
 

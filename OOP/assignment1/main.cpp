@@ -83,7 +83,7 @@ public:
         {
             if (isnum(temp))
             {
-                if (stoi(temp) > 0)
+                if (stoll(temp) > 0)
                 {
                     if (temp.size() == 10)
                     {
@@ -118,7 +118,7 @@ public:
         {
             if (isnum(temp))
             {
-                if (stoi(temp) > 0)
+                if (stoll(temp) > 0)
                 {
                     if (temp.size() == 4)
                     {
@@ -160,7 +160,7 @@ public:
         {
             if (isnum(temp))
             {
-                if (stoi(temp) > 0)
+                if (stoll(temp) > 0)
                 {
                     if (temp.size() <= 12)
                     {
@@ -201,7 +201,6 @@ int main(void)
 {
     /*파일 입력 -> student list*/
     int isopennum = filetostuvec();
-
     while (true)
     {
         int num = mainmodenum();
@@ -213,7 +212,18 @@ int main(void)
             a.setbirthyear();
             a.setdepartment();
             a.settel();
-            a.printstudent();
+            ofstream writeToFile;
+            writeToFile.open("file1.txt", ios::out | ios::app);
+            if (isopennum == 0)
+            {
+                string strtemp = a.getname() + "/" + a.getid() + "/" + a.getbirthyear() + "/" + a.getdepartment() + "/" + a.gettel();
+                writeToFile.write(strtemp.c_str(), strtemp.size());
+            }
+            else
+            {
+                string strtemp = "\n" + a.getname() + "/" + a.getid() + "/" + a.getbirthyear() + "/" + a.getdepartment() + "/" + a.gettel();
+                writeToFile.write(strtemp.c_str(), strtemp.size());
+            }
             v.push_back(a);
             isopennum = 1;
         }
@@ -240,7 +250,6 @@ int main(void)
         else if ((num == 4) && (isopennum == 1))
         {
             cout << "Exit";
-            /*파일에 write*/
             break;
         }
         else
