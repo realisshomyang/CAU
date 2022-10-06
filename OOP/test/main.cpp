@@ -6,7 +6,7 @@
 
 using namespace std;
 
-void filetostuvec();
+int filetostuvec();
 
 class student
 {
@@ -40,6 +40,11 @@ vector<student> v;
 int main()
 {
     filetostuvec();
+    vector<student>::iterator iter;
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i].printstudent();
+    }
     /*
     filetostuvec();
     ifstream fin;
@@ -101,33 +106,43 @@ int main()
 }
 */
 
-void filetostuvec()
+int filetostuvec()
 {
+
     ifstream fin;
     fin.open("file1.txt");
-    string line;
-    string str[5];
-    int i = 0;
-    while (!fin.eof())
+    if (fin.is_open() == false)
     {
-        i = 0;
-        getline(fin, line);
-        stringstream ss(line);
-        string word;
-        while (!ss.eof())
-        {
-            getline(ss, word, '/');
-            str[i] = word;
-            i++;
-        }
-        student st = student(str[0], str[1], str[2], str[3], str[4]);
-        v.push_back(st);
-    }
-    vector<student>::iterator iter;
-    for (int i = 0; i < v.size(); i++)
-    {
-        v[i].printstudent();
-    }
+        cout << "no file";
+        fin.close();
 
-    fin.close();
+        ofstream writeFile;
+        writeFile.open("file1.txt");
+        return 0;
+    }
+    else
+    {
+        cout << "file\n";
+        string line;
+        string str[5];
+        int i = 0;
+        while (!fin.eof())
+        {
+            i = 0;
+            getline(fin, line);
+            stringstream ss(line);
+            string word;
+            while (!ss.eof())
+            {
+                getline(ss, word, '/');
+                str[i] = word;
+                i++;
+            }
+            student st = student(str[0], str[1], str[2], str[3], str[4]);
+            v.push_back(st);
+        }
+
+        fin.close();
+        return 1;
+    }
 }

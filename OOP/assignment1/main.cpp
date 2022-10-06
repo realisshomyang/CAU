@@ -1,12 +1,16 @@
 #include <iostream>
 #include <string>
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <sstream>
 using namespace std;
 int searchmodenum();
 int sortmodenum();
 int mainmodenum();
 int getdigit(int a);
 bool isnum(const string &str);
-
+int filetostuvec();
 class student
 {
 private:
@@ -17,10 +21,18 @@ private:
     string tel;
 
 public:
+    // constructor
     student()
     {
     }
-
+    student(string a, string b, string c, string d, string e)
+    {
+        this->id = b;
+        this->name = a;
+        this->birthyear = c;
+        this->department = d;
+        this->tel = e;
+    }
     // getter
     string getname()
     {
@@ -180,8 +192,16 @@ public:
     }
 };
 
+vector<student> v;
+class manage
+{
+};
+
 int main(void)
 {
+    /*파일 입력 -> student list*/
+    int isopennum = filetostuvec();
+
     while (true)
     {
         int num = mainmodenum();
@@ -194,8 +214,10 @@ int main(void)
             a.setdepartment();
             a.settel();
             a.printstudent();
+            v.push_back(a);
+            isopennum = 1;
         }
-        else if (num == 2)
+        else if ((num == 2) && (isopennum == 1))
         {
             int searchmode = searchmodenum();
             /*student 배열 sort 후 프린트
@@ -205,11 +227,17 @@ int main(void)
             모드 4
             */
         }
-        else if (num == 3)
+        else if ((num == 3) && (isopennum == 1))
         {
             int sortmmode = sortmodenum();
+            /*student 배열 sort 후 프린트
+            모드 1
+            모드 2
+            모드 3
+            모드 4
+            */
         }
-        else if (num == 4)
+        else if ((num == 4) && (isopennum == 1))
         {
             cout << "Exit";
             /*파일에 write*/
@@ -217,7 +245,7 @@ int main(void)
         }
         else
         {
-            cout << "input valid num 1,2,3,4";
+            cout << "if there is no file, you can only choose insert mode\n";
         }
     }
 }
@@ -281,4 +309,44 @@ bool isnum(string const &str)
         it++;
     }
     return !str.empty() && it == str.end();
+}
+int filetostuvec()
+{
+
+    ifstream fin;
+    fin.open("file1.txt");
+    if (fin.is_open() == false)
+    {
+        fin.close();
+
+        ofstream writeFile;
+        writeFile.open("file1.txt");
+        writeFile.close();
+        return 0;
+    }
+    else
+    {
+        cout << "file\n";
+        string line;
+        string str[5];
+        int i = 0;
+        while (!fin.eof())
+        {
+            i = 0;
+            getline(fin, line);
+            stringstream ss(line);
+            string word;
+            while (!ss.eof())
+            {
+                getline(ss, word, '/');
+                str[i] = word;
+                i++;
+            }
+            student st = student(str[0], str[1], str[2], str[3], str[4]);
+            v.push_back(st);
+        }
+
+        fin.close();
+        return 1;
+    }
 }
