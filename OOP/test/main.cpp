@@ -3,12 +3,15 @@
 #include <vector>
 #include <sstream>
 #include <string>
-
+#include <algorithm>
 using namespace std;
 
 int filetostuvec();
 void vectofile();
 void search(int a, string str);
+void asort(int a);
+// compare함수
+
 class student
 {
 private:
@@ -55,16 +58,25 @@ public:
         return tel;
     }
 };
-
+bool comparen(student a, student b);
+bool comparei(student a, student b);
+bool compareadm(student a, student b);
 vector<student> v;
 int main()
 {
-    /*filetostuvec();
-    vector<student> tmp;
-    search(1,"")*/
+    filetostuvec();
+    asort(1);
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i].printstudent();
+    }
+
+    /*vector<student> tmp;
+    search(1,"")
     string a = "2019380210";
     string b = a.substr(0, 4);
-    cout << b;
+    cout << b;*/
+
     // vectofile();
     /*
     filetostuvec();
@@ -178,6 +190,50 @@ void vectofile()
     }
 }
 
+bool comparen(student a, student b)
+{
+    if (a.getname() < b.getname())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool comparei(student a, student b)
+{
+    if (atoll(a.getid().c_str()) < atoll(b.getid().c_str()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool compareadm(student a, student b)
+{
+    if (atoll(a.getid().substr(0, 4).c_str()) < atoll(b.getid().substr(0, 4).c_str()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool compared(student a, student b)
+{
+    if (a.getdepartment() < b.getdepartment())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
 void search(int a, string str)
 {
     if (a == 1)
@@ -239,5 +295,22 @@ void search(int a, string str)
                 cout << "no data in file";
             }
         }
+    }
+}
+void asort(int a)
+{
+    if (a == 1)
+    {
+        cout << "sort by name\n";
+        sort(v.begin(), v.end(), comparen);
+    }
+    else if (a == 2)
+    {
+        cout << "sort by studentID\n";
+        sort(v.begin(), v.end(), comparei);
+    }
+    else if (a == 3)
+    {
+        cout << "sort by "
     }
 }

@@ -18,6 +18,7 @@ string inputbirth();
 string inputdepart();
 string inputtel();
 string inputadm();
+void asort(int a);
 class student
 {
 private:
@@ -123,12 +124,15 @@ public:
     }
     void printstudent()
     {
-        cout << this->name << this->id << this->birthyear << this->department << this->tel << endl;
+        cout << this->name << " " << this->id << " " << this->birthyear << " " << this->department << " " << this->tel << endl;
     }
 };
 
 vector<student> v;
-
+bool comparen(student a, student b);
+bool comparei(student a, student b);
+bool compareadm(student a, student b);
+bool compared(student a, student b);
 class manage
 {
 };
@@ -137,6 +141,11 @@ int main(void)
 {
     /*파일 입력 -> student list*/
     int isopennum = filetostuvec();
+    for (int i = 0; i < v.size(); i++)
+    {
+        v[i].printstudent();
+    }
+
     while (true)
     {
         int num = mainmodenum();
@@ -197,17 +206,13 @@ int main(void)
                 {
                     v[i].printstudent();
                 }
+                cout << "\n";
             }
         }
         else if ((num == 3) && (isopennum == 1))
         {
-            int sortmmode = sortmodenum();
-            /*student 배열 sort 후 프린트
-            모드 1
-            모드 2
-            모드 3
-            모드 4
-            */
+            int sortmode = sortmodenum();
+            asort(sortmode);
         }
         else if ((num == 4) && (isopennum == 1))
         {
@@ -566,5 +571,74 @@ void search(int a, string str)
         {
             cout << "no data in file";
         }
+    }
+}
+
+bool comparen(student a, student b)
+{
+    if (a.getname() < b.getname())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool comparei(student a, student b)
+{
+    if (atoll(a.getid().c_str()) < atoll(b.getid().c_str()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool compareadm(student a, student b)
+{
+    if (atoll(a.getid().substr(0, 4).c_str()) < atoll(b.getid().substr(0, 4).c_str()))
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+bool compared(student a, student b)
+{
+    if (a.getdepartment() < b.getdepartment())
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+void asort(int a)
+{
+    if (a == 1)
+    {
+        cout << "sort by name\n";
+        sort(v.begin(), v.end(), comparen);
+    }
+    else if (a == 2)
+    {
+        cout << "sort by studentID\n";
+        sort(v.begin(), v.end(), comparei);
+    }
+    else if (a == 3)
+    {
+        cout << "sort by admin\n";
+        sort(v.begin(), v.end(), compareadm);
+    }
+    else if (a == 4)
+    {
+        cout << "sort by department name\n";
+        sort(v.begin(), v.end(), compared);
     }
 }
