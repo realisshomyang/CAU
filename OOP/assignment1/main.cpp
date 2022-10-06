@@ -11,6 +11,13 @@ int mainmodenum();
 int getdigit(int a);
 bool isnum(const string &str);
 int filetostuvec();
+void search(int a, string str);
+string inputid();
+string inputname();
+string inputbirth();
+string inputdepart();
+string inputtel();
+string inputadm();
 class student
 {
 private:
@@ -58,55 +65,13 @@ public:
     void setname()
     {
         string temp;
-        cout << "Name ?";
-        cin >> temp;
-        while (true)
-        {
-            if (temp.length() > 15)
-            {
-                cout << "Name input is up to 15 input again";
-                cin >> temp;
-            }
-            else
-            {
-                break;
-            }
-        }
+        temp = inputname();
         this->name = temp;
     }
     void setid()
     {
         string temp;
-        cout << "Student ID (10 digits)?";
-        cin >> temp;
-        while (true)
-        {
-            if (isnum(temp))
-            {
-                if (stoll(temp) > 0)
-                {
-                    if (temp.size() == 10)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        cout << "Student ID must be 10 digits";
-                        cin >> temp;
-                    }
-                }
-                else
-                {
-                    cout << "Student ID must be positive";
-                    cin >> temp;
-                }
-            }
-            else
-            {
-                cout << "Student ID input must be digit";
-                cin >> temp;
-            }
-        }
+        temp = inputid();
         this->id = temp;
     }
     void setbirthyear()
@@ -147,43 +112,13 @@ public:
     void setdepartment()
     {
         string temp;
-        cout << "department";
-        cin >> temp;
+        temp = inputdepart();
         this->department = temp;
     }
     void settel()
     {
         string temp;
-        cout << "tel (up to 12 digits)?";
-        cin >> temp;
-        while (true)
-        {
-            if (isnum(temp))
-            {
-                if (stoll(temp) > 0)
-                {
-                    if (temp.size() <= 12)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        cout << "tel must be up to 12 digits";
-                        cin >> temp;
-                    }
-                }
-                else
-                {
-                    cout << "tel must be positive";
-                    cin >> temp;
-                }
-            }
-            else
-            {
-                cout << "telnum input must be digit";
-                cin >> temp;
-            }
-        }
+        temp = inputtel();
         this->tel = temp;
     }
     void printstudent()
@@ -193,6 +128,7 @@ public:
 };
 
 vector<student> v;
+
 class manage
 {
 };
@@ -230,12 +166,38 @@ int main(void)
         else if ((num == 2) && (isopennum == 1))
         {
             int searchmode = searchmodenum();
-            /*student 배열 sort 후 프린트
-            모드 1
-            모드 2
-            모드 3
-            모드 4
-            */
+            if (searchmode == 1)
+            {
+                cout << "input name that you will find.\n";
+                string tmp_name = inputname();
+                search(searchmode, tmp_name);
+            }
+            else if (searchmode == 2)
+            {
+                cout << "input id that you will find\n";
+                string tmp_id = inputid();
+                search(searchmode, tmp_id);
+            }
+            else if (searchmode == 3)
+            {
+                cout << "input addmission year that you will find\n";
+                string tmp_ad = inputadm();
+                search(searchmode, tmp_ad);
+            }
+            else if (searchmode == 4)
+            {
+                cout << "input department that you will find\n";
+                string tmp_dept = inputdepart();
+                search(searchmode, tmp_dept);
+            }
+            else if (searchmode == 5)
+            {
+                vector<student>::iterator iter;
+                for (int i = 0; i < v.size(); i++)
+                {
+                    v[i].printstudent();
+                }
+            }
         }
         else if ((num == 3) && (isopennum == 1))
         {
@@ -357,5 +319,252 @@ int filetostuvec()
 
         fin.close();
         return 1;
+    }
+}
+
+string inputid()
+{
+    string temp;
+    cout << "Student ID (10 digits)?";
+    cin >> temp;
+    while (true)
+    {
+        if (isnum(temp))
+        {
+            if (stoll(temp) > 0)
+            {
+                if (temp.size() == 10)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "Student ID must be 10 digits";
+                    cin >> temp;
+                }
+            }
+            else
+            {
+                cout << "Student ID must be positive";
+                cin >> temp;
+            }
+        }
+        else
+        {
+            cout << "Student ID input must be digit";
+            cin >> temp;
+        }
+    }
+    return temp;
+}
+string inputadm()
+{
+    string temp;
+    cout << "adminin year (4 digits)?";
+    cin >> temp;
+    while (true)
+    {
+        if (isnum(temp))
+        {
+            if (stoll(temp) > 0)
+            {
+                if (temp.size() == 4)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "adminyear must be 4 digits";
+                    cin >> temp;
+                }
+            }
+            else
+            {
+                cout << "Student ID must be positive";
+                cin >> temp;
+            }
+        }
+        else
+        {
+            cout << "adminyear input must be digit";
+            cin >> temp;
+        }
+    }
+    return temp;
+}
+string inputname()
+{
+    string temp;
+    cout << "Name ?";
+    cin >> temp;
+    while (true)
+    {
+        if (temp.length() > 15)
+        {
+            cout << "Name input is up to 15 input again";
+            cin >> temp;
+        }
+        else
+        {
+            break;
+        }
+    }
+    return temp;
+}
+string inputbirth()
+{
+    string temp;
+    cout << "Birth year (4 digits)?";
+    cin >> temp;
+    while (true)
+    {
+        if (isnum(temp))
+        {
+            if (stoll(temp) > 0)
+            {
+                if (temp.size() == 4)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "birthyear must be 4 digits";
+                    cin >> temp;
+                }
+            }
+            else
+            {
+                cout << "birthyear must be positive";
+                cin >> temp;
+            }
+        }
+        else
+        {
+            cout << "birth year input must be digit";
+            cin >> temp;
+        }
+    }
+    return temp;
+}
+string inputdepart()
+{
+    string temp;
+    cout << "department";
+    cin >> temp;
+
+    return temp;
+}
+string inputtel()
+{
+    string temp;
+    cout << "tel (up to 12 digits)?";
+    cin >> temp;
+    while (true)
+    {
+        if (isnum(temp))
+        {
+            if (stoll(temp) > 0)
+            {
+                if (temp.size() <= 12)
+                {
+                    break;
+                }
+                else
+                {
+                    cout << "tel must be up to 12 digits";
+                    cin >> temp;
+                }
+            }
+            else
+            {
+                cout << "tel must be positive";
+                cin >> temp;
+            }
+        }
+        else
+        {
+            cout << "telnum input must be digit";
+            cin >> temp;
+        }
+    }
+    return temp;
+}
+
+void vectofile()
+{
+    vector<student>::iterator iter;
+    for (int i = 0; i < v.size(); i++)
+    {
+        string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+        cout << temp;
+    }
+}
+
+void search(int a, string str)
+{
+    int flag = 0;
+    if (a == 1)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getname() == str)
+            {
+                flag = 1;
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+        }
+        if (flag == 0)
+        {
+            cout << "no data in file";
+        }
+    }
+    else if (a == 2)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getid() == str)
+            {
+                flag = 1;
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+        }
+        if (flag == 0)
+        {
+            cout << "no data in file";
+        }
+    }
+    else if (a == 3)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getid().substr(0, 4) == str)
+            {
+                flag = 1;
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+        }
+        if (flag == 0)
+        {
+            cout << "no data in file";
+        }
+    }
+    else if (a == 4)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getdepartment() == str)
+            {
+                flag = 1;
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+        }
+        if (flag == 0)
+        {
+            cout << "no data in file";
+        }
     }
 }

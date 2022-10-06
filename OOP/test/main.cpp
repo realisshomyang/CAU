@@ -8,6 +8,7 @@ using namespace std;
 
 int filetostuvec();
 void vectofile();
+void search(int a, string str);
 class student
 {
 private:
@@ -56,16 +57,15 @@ public:
 };
 
 vector<student> v;
-
 int main()
 {
-    filetostuvec();
-    vector<student>::iterator iter;
-    /*for (int i = 0; i < v.size(); i++)
-    {
-        v[i].printstudent();
-    }*/
-    vectofile();
+    /*filetostuvec();
+    vector<student> tmp;
+    search(1,"")*/
+    string a = "2019380210";
+    string b = a.substr(0, 4);
+    cout << b;
+    // vectofile();
     /*
     filetostuvec();
     ifstream fin;
@@ -175,5 +175,69 @@ void vectofile()
     {
         string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
         cout << temp;
+    }
+}
+
+void search(int a, string str)
+{
+    if (a == 1)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getname() == str)
+            {
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+            else
+            {
+                cout << "no data in file";
+            }
+        }
+    }
+    else if (a == 2)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getid() == str)
+            {
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+            else
+            {
+                cout << "no data in file";
+            }
+        }
+    }
+    else if (a == 3)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getid().substr(0, 3) == str)
+            {
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+            else
+            {
+                cout << "no data in file";
+            }
+        }
+    }
+    else if (a == 4)
+    {
+        for (int i = 0; i < v.size(); i++)
+        {
+            if (v[i].getdepartment() == str)
+            {
+                string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
+                cout << temp;
+            }
+            else
+            {
+                cout << "no data in file";
+            }
+        }
     }
 }
