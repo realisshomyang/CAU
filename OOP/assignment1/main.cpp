@@ -5,13 +5,16 @@
 #include <vector>
 #include <sstream>
 using namespace std;
+
+//이상무
 int searchmodenum();
 int sortmodenum();
 int mainmodenum();
-int getdigit(int a);
 bool isnum(const string &str);
+//벡터 v 들어가 있음
 int filetostuvec();
 void search(int a, string str);
+
 string inputid();
 string inputname();
 string inputbirth();
@@ -79,36 +82,7 @@ public:
     void setbirthyear()
     {
         string temp;
-        cout << "Birth year (4 digits)?";
-        cin >> temp;
-        while (true)
-        {
-            if (isnum(temp))
-            {
-                if (stoll(temp) > 0)
-                {
-                    if (temp.size() == 4)
-                    {
-                        break;
-                    }
-                    else
-                    {
-                        cout << "birthyear must be 4 digits";
-                        cin >> temp;
-                    }
-                }
-                else
-                {
-                    cout << "birthyear must be positive";
-                    cin >> temp;
-                }
-            }
-            else
-            {
-                cout << "birth year input must be digit";
-                cin >> temp;
-            }
-        }
+        temp = inputbirth();
         this->birthyear = temp;
     }
     void setdepartment()
@@ -225,13 +199,6 @@ int main(void)
             cout << "if there is no file, you can only choose insert mode\n";
         }
     }
-}
-
-int getdigit(int a)
-{
-    string tmp;
-    tmp = to_string(a);
-    return tmp.size();
 }
 
 int mainmodenum()
@@ -503,16 +470,6 @@ string inputtel()
         }
     }
     return temp;
-}
-
-void vectofile()
-{
-    vector<student>::iterator iter;
-    for (int i = 0; i < v.size(); i++)
-    {
-        string temp = v[i].getname() + "/" + v[i].getid() + "/" + v[i].getbirthyear() + "/" + v[i].getdepartment() + "/" + v[i].gettel() + "\n";
-        cout << temp;
-    }
 }
 
 void search(int a, string str)
