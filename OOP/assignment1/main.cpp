@@ -19,6 +19,7 @@ string inputdepart();
 string inputtel();
 string inputadm();
 void asort(int a);
+bool isexist(string str);
 class student
 {
 private:
@@ -340,7 +341,16 @@ string inputid()
             {
                 if (temp.size() == 10)
                 {
-                    break;
+                    if (isexist(temp))
+                    {
+                        cout << "Error : Already inserted input again";
+                        cin >> temp;
+                    }
+                    else
+                    {
+                        return temp;
+                        break;
+                    }
                 }
                 else
                 {
@@ -641,4 +651,16 @@ void asort(int a)
         cout << "sort by department name\n";
         sort(v.begin(), v.end(), compared);
     }
+}
+
+bool isexist(string str)
+{
+    for (int i = 0; i < v.size(); i++)
+    {
+        if (v[i].getid() == str)
+        {
+            return true;
+        }
+    }
+    return false;
 }
