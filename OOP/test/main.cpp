@@ -61,6 +61,7 @@ public:
 bool comparen(student a, student b);
 bool comparei(student a, student b);
 bool compareadm(student a, student b);
+bool compared(student a, student b);
 vector<student> v;
 int main()
 {
@@ -311,6 +312,11 @@ void asort(int a)
     }
     else if (a == 3)
     {
-        cout << "sort by "
+        cout << "sort by admin\n";
+        sort(v.begin(), v.end(),compareadm);
+    }
+    else if (a==4){
+        cout << "sort by department name\n";
+        sort(v.begin(),v.end(),compared);
     }
 }
