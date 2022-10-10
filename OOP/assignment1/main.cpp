@@ -6,23 +6,6 @@
 #include <sstream>
 using namespace std;
 
-//이상무
-int searchmodenum();
-int sortmodenum();
-int mainmodenum();
-bool isnum(const string &str);
-//벡터 v 들어가 있음
-int filetostuvec();
-void search(int a, string str);
-
-string inputid();
-string inputname();
-string inputbirth();
-string inputdepart();
-string inputtel();
-string inputadm();
-void asort(int a);
-bool isexist(string str);
 class student
 {
 private:
@@ -103,11 +86,27 @@ public:
     }
 };
 
-vector<student> v;
+//이상무
+int searchmodenum();
+int sortmodenum();
+int mainmodenum();
+bool isnum(const string &str);
 bool comparen(student a, student b);
 bool comparei(student a, student b);
 bool compareadm(student a, student b);
 bool compared(student a, student b);
+string inputid();
+string inputname();
+string inputbirth();
+string inputdepart();
+string inputtel();
+string inputadm();
+//벡터 v 들어가 있음
+int filetostuvec();
+void search(int a, string str);
+void asort(int a);
+bool isexist(string str);
+vector<student> v;
 class manage
 {
 };
@@ -126,7 +125,7 @@ int main(void)
         int num = mainmodenum();
         if (num == 1)
         {
-            student a = student();
+            stud2ent a = student();
             a.setname();
             a.setid();
             a.setbirthyear();
