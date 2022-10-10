@@ -8,12 +8,14 @@ private:
     planmanager planmanager();
 
 public:
+    // load datas from db -> control datas by recipemanager, planmanager class.
     gretter(){};
     // basic IIKH intoduction print
     void printUI();
-    // input mode
-    void inputMode(){};
-    void searchRecipe(recipemanager recipes);
-    void addRecipe(recipemanager recipes);
-    void deleteRecipe(recipemanager recipes);
+    // choose mode
+    int inputMode(){};
+
+    // edit, add, search ,delete recipes information in this func
+    // edit ,add, search, delete palns information in this func
+    void runprogramfunc(int inputmodenum);
 };
