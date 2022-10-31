@@ -20,5 +20,5 @@ public:
     int getYear();
     int getMonth();
     int getDay();
-    string time;
+    string getTime();
 }
